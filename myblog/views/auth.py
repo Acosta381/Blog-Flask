@@ -47,11 +47,9 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
 
-        user = User(username, generate_password_hash(password))
-
         error = None
 
-        user_name = User.query.filter_by(username = username).first()
+        user = User.query.filter_by(username = username).first()
 
         if user == None:
             error = 'Incorrect Username'
@@ -76,7 +74,7 @@ def load_logger_in_user():
     else:
         g.user = User.query.get_or_404(user_id)
 
-@auth.route('/')
+@auth.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('blog.index'))

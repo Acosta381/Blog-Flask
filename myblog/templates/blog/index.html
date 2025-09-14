@@ -13,7 +13,7 @@
         <header>
             <div>
                <h1>{{ post.title }}</h1>
-                <div>
+                <div class="about">
                     Posted by {{ get_user(post.author).username }}
                     on {{ post.created.strftime('%Y-%m-%d') }}
                 </div> 

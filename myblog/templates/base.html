@@ -3,34 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/blog.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <title>{% block title %}{% endblock %}MyBlog</title>
 </head>
 <body>
-    <header>
-        <div>
-            <a href="{{ url_for(blog.index) }}">
+    <header class="header">
+        <div class="nav">
+          <div>
+            <a href="{{ url_for('blog.index') }}">
                 <h1>MyBlog</h1>
             </a>
         </div>
         <nav>
             {% if g.user %}
-            <samp>{{ g.user.username }}</samp>
-            <a href="{{ url_for(auth.logout) }}">Log Out</a>
+            <img src="{{ url_for('static', filename='img/user.png') }}" alt="">
+            <span>{{ g.user.username }}</span>
+            <a href="{{ url_for('auth.logout') }}">Log Out</a>
             {% else %}
-            <a href="{{ url_for(auth.register) }}">Register</a>
-            <a href="{{ url_for(auth.login) }}">Login</a>
+            <a href="{{ url_for('auth.register') }}">Register</a>
+            <a href="{{ url_for('auth.login') }}">Login</a>
             {% endif %}
-        </nav>
+        </nav>  
+        </div>
+        
     </header>
 
     <section>
-        <header>{% block header %}{% endblock %}</header>
+        <div class="content">
+            <header>{% block header %}{% endblock %}</header>
 
-        {% for messgae in get_flashed_messages() %}
-            <div> {{ message }} </div>
+        {% for message in get_flashed_messages() %}
+            <div class="flash"> {{ message }} </div>
         {% endfor %}
 
         {% block content %}{% endblock %}
+        </div>
+        
     </section>
 </body>
 </html>
