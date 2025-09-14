@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}MyBlog</title>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="">
+                <h1>MyBlog</h1>
+            </a>
+        </div>
+        <nav>
+            <a href="">Register</a>
+            <a href="">Login</a>
+        </nav>
+    </header>
+
+    <section>
+        <header>{% block header %}{% endblock %}</header>
+
+        {% for messgae in get_flashed_messages() %}
+            <div> {{ message }} </div>
+        {% endfor %}
+
+        {% block content %}{% endblock %}
+    </section>
+</body>
+</html>

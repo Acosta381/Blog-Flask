@@ -4,7 +4,7 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(50))
-    password = db.Column(db.String)
+    password = db.Column(db.String(100))
 
     def __init__(self, username, password):  # to be able to create, fetch or manage the user database class
         self.username = username
