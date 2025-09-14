@@ -8,13 +8,18 @@
 <body>
     <header>
         <div>
-            <a href="">
+            <a href="{{ url_for(blog.index) }}">
                 <h1>MyBlog</h1>
             </a>
         </div>
         <nav>
-            <a href="">Register</a>
-            <a href="">Login</a>
+            {% if g.user %}
+            <samp>{{ g.user.username }}</samp>
+            <a href="{{ url_for(auth.logout) }}">Log Out</a>
+            {% else %}
+            <a href="{{ url_for(auth.register) }}">Register</a>
+            <a href="{{ url_for(auth.login) }}">Login</a>
+            {% endif %}
         </nav>
     </header>
 

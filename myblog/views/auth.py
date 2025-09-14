@@ -8,6 +8,8 @@ from myblog.models.user import User
 
 from myblog import db
 
+import functools
+
 auth = Blueprint('auth', __name__, url_prefix = '/auth')
 
 #Register a User
@@ -50,7 +52,8 @@ def login():
         error = None
 
         user_name = User.query.filter_by(username = username).first()
-        if user_name == None:
+
+        if user == None:
             error = 'Incorrect Username'
         elif not check_password_hash(user.password, password):
             error = 'Incorrect Password'
@@ -58,7 +61,30 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user.id
-            #return redirect(url_for('index'))
+            return redirect(url_for('blog.index'))
+        
         flash(error)
 
     return render_template('auth/login.html')
+
+@auth.before_app_request
+def load_logger_in_user():
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.get_or_404(user_id)
+
+@auth.route('/')
+def logout():
+    session.clear()
+    return redirect(url_for('blog.index'))
+
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('auth.login'))
+        return view(**kwargs)
+    return wrapped_view
