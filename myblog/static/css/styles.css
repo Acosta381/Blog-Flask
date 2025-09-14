@@ -56,7 +56,7 @@ body{
     padding: 10px 0;
 }
 
-/* Mensaje de Flahs*/
+/*Flash Messages*/
 .flash{
     background-color: #0c950c;
     color: #fff;
@@ -67,7 +67,7 @@ body{
     background-color: red;
 }
 
-/*Index - Publicaciones*/
+/*Index - Posts*/
 article{
     padding: 10px 0;
 }
@@ -89,7 +89,7 @@ article header .about{
     font-size: 18px;
 }
 
-/*Formularios*/
+/*Forms*/
 form{
     margin: 10px 0;
     display: flex;
@@ -109,7 +109,7 @@ form input[type=submit]{
     min-width: 200px;
 }
 
-/* LOGIN*/
+/*Login*/
 .login{
     max-width: 30%;
     margin: 0 auto;
